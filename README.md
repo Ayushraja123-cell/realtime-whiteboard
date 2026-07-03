@@ -25,6 +25,27 @@ A modern, high-performance real-time collaborative whiteboard application design
 *   **Database:** MongoDB & Mongoose
 *   **Deployment Architecture:** Unified monorepo structure where the Express backend serves the static React build for seamless single-service hosting.
 
+## 📂 Folder Structure
+
+```text
+realtime-whiteboard/
+├── client/                 # Frontend React Application (Vite)
+│   ├── src/
+│   │   ├── components/     # UI Components (Toolbar, Canvas, Modals, etc.)
+│   │   ├── assets/         # Static assets like icons and images
+│   │   ├── App.jsx         # Main application routing
+│   │   ├── Board.jsx       # Core whiteboard logic and socket management
+│   │   └── Dashboard.jsx   # User dashboard for room management
+│   └── package.json
+├── server/                 # Backend Node.js Application (Express)
+│   ├── models/             # MongoDB Mongoose Schemas (Board, User)
+│   ├── index.js            # Main server, API routes, and Socket.io handlers
+│   └── package.json
+├── .gitignore
+├── package.json            # Root configuration for unified deployment
+└── README.md
+```
+
 ## 🚀 Getting Started Locally
 
 ### Prerequisites
@@ -74,6 +95,3 @@ This project is configured to be deployed as a single unified service (perfect f
    ```
 
 The Express server will automatically serve the built React files located in `client/dist`.
-
----
-*Built with ❤️ and Antigravity*
