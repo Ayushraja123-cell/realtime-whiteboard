@@ -1,97 +1,123 @@
-# Realtime Collaborative Whiteboard 🎨
+# CollabCanvas – Real-Time Collaborative Whiteboard 🎨
 
-A modern, high-performance real-time collaborative whiteboard application designed for teams, educators, and creative individuals. Build dynamic diagrams, brainstorm ideas, and collaborate with your peers instantly in shared rooms.
+A modern, high-performance real-time collaborative whiteboard application designed for teams, educators, and creative individuals. Draw, brainstorm, and collaborate with your peers instantly in shared rooms.
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://realtime-whiteboard-f8om.onrender.com)
 
 ## ✨ Features
 
-*   **Real-time Collaboration:** See other users' cursors and drawings instantly via Socket.io.
-*   **Room-Based Architecture:** Create specific rooms (e.g., `/board/marketing`) to isolate workspaces and collaborate securely with your team.
-*   **Rich Drawing Tools:**
-    *   Pencil (freehand drawing)
-    *   Eraser
-    *   Geometric Shapes (Rectangles, Circles, Lines)
-    *   Text Boxes
-    *   Sticky Notes
-*   **AI Flowchart Generation:** Describe what you want, and an AI agent will instantly generate a structured flowchart directly onto the canvas.
-*   **History & Snapshots:** Save "snapshots" of your board state and restore them at any time from the History Panel.
-*   **Targeted Board Clearing:** When you click "Clear", it safely erases only *your* drawings, preserving the work of other collaborators in the room.
-*   **Infinite Canvas & Resizing:** Seamlessly drag, resize, and modify elements.
-*   **Dark Mode:** Built-in sleek dark mode for comfortable late-night brainstorming.
+- **Real-time Collaboration** — See other users' cursors and drawings instantly via WebSockets.
+- **Room-Based Architecture** — Create isolated rooms (e.g., `/board/marketing`) and collaborate securely with your team.
+- **Rich Drawing Tools** — Pencil, Eraser, Rectangles, Circles, Lines, Text Boxes, and Sticky Notes.
+- **AI Flowchart Generation** — Describe what you want in plain English, and the integrated Gemini AI generates a structured flowchart directly onto the canvas.
+- **History & Snapshots** — Save snapshots of your board state and restore them at any time from the History Panel.
+- **Scoped Board Clearing** — "Clear" safely erases only *your* drawings, preserving the work of other collaborators.
+- **Drag, Resize & Edit** — Seamlessly select, move, resize, and modify any element on the canvas.
+- **Dark Mode** — Built-in sleek dark mode for comfortable late-night brainstorming.
+- **JWT Authentication** — Secure user registration and login with encrypted passwords.
 
-## 🛠️ Technology Stack
+## 🛠️ Tech Stack
 
-*   **Frontend:** React (Vite), TailwindCSS, Socket.io-client
-*   **Backend:** Node.js, Express.js, Socket.io
-*   **Database:** MongoDB & Mongoose
-*   **Deployment Architecture:** Unified monorepo structure where the Express backend serves the static React build for seamless single-service hosting.
+| Layer | Technologies |
+|-------|-------------|
+| **Frontend** | React.js, Vite, TailwindCSS, Socket.io-client |
+| **Backend** | Node.js, Express.js, Socket.io |
+| **Database** | MongoDB, Mongoose |
+| **Auth & Security** | JSON Web Tokens (JWT), Bcrypt.js, Rate Limiting |
+| **AI** | Google Gemini Generative AI API |
+| **Deployment** | Render, MongoDB Atlas |
 
-## 📂 Folder Structure
+## 📂 Project Structure
 
-```text
+```
 realtime-whiteboard/
-├── client/                 # Frontend React Application (Vite)
+│
+├── client/                          # Frontend (React + Vite)
+│   ├── public/                      # Static public assets (favicon, icons)
 │   ├── src/
-│   │   ├── components/     # UI Components (Toolbar, Canvas, Modals, etc.)
-│   │   ├── assets/         # Static assets like icons and images
-│   │   ├── App.jsx         # Main application routing
-│   │   ├── Board.jsx       # Core whiteboard logic and socket management
-│   │   └── Dashboard.jsx   # User dashboard for room management
+│   │   ├── components/
+│   │   │   ├── AiModal.jsx          # AI flowchart generation modal
+│   │   │   ├── Canvas.jsx           # Core HTML5 Canvas rendering engine
+│   │   │   ├── ConfirmDialog.jsx    # Reusable confirmation dialog
+│   │   │   ├── Cursors.jsx          # Live multi-user cursor display
+│   │   │   ├── ErrorBoundary.jsx    # React error boundary wrapper
+│   │   │   ├── HistoryPanel.jsx     # Board snapshot history panel
+│   │   │   ├── Login.jsx            # User authentication form
+│   │   │   ├── TemplatesModal.jsx   # Board templates selector
+│   │   │   ├── Toast.jsx            # Toast notification system
+│   │   │   └── Toolbar.jsx          # Drawing tools & controls toolbar
+│   │   ├── assets/                  # Images and static assets
+│   │   ├── App.jsx                  # Root component with routing
+│   │   ├── Board.jsx                # Main board logic & socket management
+│   │   ├── Dashboard.jsx            # User dashboard & room management
+│   │   ├── index.css                # Global styles
+│   │   └── main.jsx                 # Application entry point
+│   ├── package.json
+│   └── vite.config.js
+│
+├── server/                          # Backend (Node.js + Express)
+│   ├── models/
+│   │   ├── Board.js                 # Board schema (strokes, versions)
+│   │   └── User.js                  # User schema (auth credentials)
+│   ├── index.js                     # Express server, REST APIs, Socket.io
 │   └── package.json
-├── server/                 # Backend Node.js Application (Express)
-│   ├── models/             # MongoDB Mongoose Schemas (Board, User)
-│   ├── index.js            # Main server, API routes, and Socket.io handlers
-│   └── package.json
+│
 ├── .gitignore
-├── package.json            # Root configuration for unified deployment
+├── LICENSE                          # MIT License
+├── package.json                     # Root scripts for unified deployment
 └── README.md
 ```
 
-## 🚀 Getting Started Locally
+## 🚀 Getting Started
 
 ### Prerequisites
-*   Node.js (v18+)
-*   MongoDB running locally or a MongoDB Atlas connection string.
+
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [MongoDB](https://www.mongodb.com/) running locally, or a MongoDB Atlas connection string
 
 ### Installation
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/YourUsername/realtime-whiteboard.git
+   git clone https://github.com/Ayushraja123-cell/realtime-whiteboard.git
    cd realtime-whiteboard
    ```
 
-2. **Install dependencies for both client and server:**
+2. **Install all dependencies:**
    ```bash
    npm run install-all
    ```
 
-3. **Configure Environment Variables:**
-   Create a `.env` file in the `server` directory and add the following:
+3. **Configure environment variables:**
+   Create a `.env` file inside the `server/` directory:
    ```env
    PORT=5000
    MONGO_URI=mongodb://127.0.0.1:27017/realtime-whiteboard
-   JWT_SECRET=your_super_secret_jwt_key
+   JWT_SECRET=your_secret_key_here
    ```
 
 4. **Start the development servers:**
    Open two terminals:
-   *   **Backend:** `cd server && npm run dev`
-   *   **Frontend:** `cd client && npm run dev`
-
-5. **Visit the app:** Open `http://localhost:5173` in your browser.
-
-## 📦 Production Deployment
-
-This project is configured to be deployed as a single unified service (perfect for platforms like Render or Railway).
-
-1. Ensure your production environment has the correct environment variables set (`NODE_ENV=production` and `MONGO_URI`).
-2. The deployment platform should run the build script:
    ```bash
-   npm run build
-   ```
-3. The platform should start the app using:
-   ```bash
-   npm start
+   # Terminal 1 — Backend
+   cd server && npm run dev
+
+   # Terminal 2 — Frontend
+   cd client && npm run dev
    ```
 
-The Express server will automatically serve the built React files located in `client/dist`.
+5. **Open the app:** Visit [http://localhost:5173](http://localhost:5173) in your browser.
+
+## 📦 Deployment
+
+This project is configured as a unified monorepo — the Express backend serves the built React frontend in production. Perfect for single-service platforms like Render or Railway.
+
+| Setting | Value |
+|---------|-------|
+| **Build Command** | `npm run build` |
+| **Start Command** | `npm start` |
+| **Environment Variables** | `NODE_ENV=production`, `MONGO_URI=<your_atlas_uri>` |
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
