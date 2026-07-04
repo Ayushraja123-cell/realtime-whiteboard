@@ -1,4 +1,4 @@
-# CollabCanvas – Real-Time Collaborative Whiteboard 🎨
+# CollabBoard – Real-Time Collaborative Whiteboard 🎨
 
 A modern, high-performance real-time collaborative whiteboard application designed for teams, educators, and creative individuals. Draw, brainstorm, and collaborate with your peers instantly in shared rooms.
 
